@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 120px;">
+    <div class="about-grid">
+        <div class="about-image reveal">
+            <div class="glow-box">
+                🧠
+            </div>
+        </div>
+
+        <div class="about-content reveal">
+            <h2>About <span class="gradient-text">NeuroGuard FND</span></h2>
+            <p>
+                NeuroGuard Fake News Detection is an advanced AI-powered platform designed to combat 
+                the spread of misinformation in digital media. Built on cutting-edge Natural Language 
+                Processing techniques, our system analyzes linguistic patterns, structural features, and 
+                semantic content to distinguish between credible journalism and fabricated narratives.
+            </p>
+            <p>
+                The platform employs an ensemble of machine learning algorithms including Logistic Regression, 
+                Random Forest, and Support Vector Machines, combined with 17 statistical linguistic features 
+                to achieve robust classification performance. Every prediction is accompanied by an explainable 
+                AI breakdown, highlighting the specific linguistic triggers that influenced the decision.
+            </p>
+            <p>
+                Developed as a production-ready Flask application with SQLAlchemy ORM, the system features 
+                secure user authentication, session management, batch processing capabilities, and a fully 
+                responsive dashboard interface.
+            </p>
+
+            <div class="tech-stack">
+                <span class="tech-tag">Python 3.12</span>
+                <span class="tech-tag">Flask</span>
+                <span class="tech-tag">SQLAlchemy</span>
+                <span class="tech-tag">scikit-learn</span>
+                <span class="tech-tag">NLTK</span>
+                <span class="tech-tag">TextBlob</span>
+                <span class="tech-tag">HTML5 Canvas</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 100px; text-align: center;">
+        <h2 class="section-title reveal">Developer</h2>
+        <div style="max-width: 500px; margin: 3rem auto; background: var(--bg-glass); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 2.5rem; backdrop-filter: blur(10px);" class="reveal">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👨‍💻</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">{{ developer }}</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Machine Learning Engineer & Full-Stack Developer</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://github.com/{{ github }}" target="_blank" style="padding: 0.6rem 1.2rem; background: rgba(0,243,255,0.1); border: 1px solid rgba(0,243,255,0.2); border-radius: 8px; color: var(--primary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">GitHub: {{ github }}</a>
+                <a href="mailto:{{ email }}" style="padding: 0.6rem 1.2rem; background: rgba(0,255,157,0.1); border: 1px solid rgba(0,255,157,0.2); border-radius: 8px; color: var(--secondary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">Email</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Fake News Detection{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div>
+        <div class="hero-badge">
+            <span class="pulse"></span>
+            <span>AI-Powered NLP System</span>
+        </div>
+
+        <h1 class="hero-title">
+            Detect Fake News<br>
+            <span class="gradient-text">Before It Spreads</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Advanced machine learning models analyze linguistic patterns, sentiment, and 
+            structural features to identify misinformation with high precision in real-time.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">
+                🚀 Get Started
+            </a>
+            <a href="{{ url_for('main.features') }}" class="btn btn-outline">
+                Explore Features
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-bar">
+    <div class="stat-card reveal">
+        <div class="stat-number" data-target="100" data-suffix="%">0</div>
+        <div class="stat-label">Real-Time Detection</div>
+    </div>
+    <div class="stat-card reveal">
+        <div class="stat-number" data-target="4" data-suffix=" Models">0</div>
+        <div class="stat-label">ML Algorithms</div>
+    </div>
+    <div class="stat-card reveal">
+        <div class="stat-number" data-target="85" data-suffix="%">0</div>
+        <div class="stat-label">Test Accuracy</div>
+    </div>
+    <div class="stat-card reveal">
+        <div class="stat-number" data-target="17" data-suffix=" Features">0</div>
+        <div class="stat-label">Linguistic Metrics</div>
+    </div>
+</section>
+
+<!-- Capabilities Section -->
+<section class="section" style="margin-top: 60px;">
+    <h2 class="section-title reveal">System Capabilities</h2>
+    <p class="section-subtitle reveal">Powered by advanced natural language processing and ensemble machine learning</p>
+
+    <div class="features-grid">
+        <div class="feature-card reveal">
+            <div class="feature-icon">🔍</div>
+            <h3 class="feature-title">Real-Time Detection</h3>
+            <p class="feature-desc">Instant classification of news articles using TF-IDF vectorization combined with 17 statistical linguistic features.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🧠</div>
+            <h3 class="feature-title">Ensemble Learning</h3>
+            <p class="feature-desc">Soft voting ensemble of Logistic Regression, Random Forest, and SVM for robust prediction confidence.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Explainable AI</h3>
+            <p class="feature-desc">Human-readable reasoning behind every prediction including sentiment analysis and sensational word detection.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">📁</div>
+            <h3 class="feature-title">Batch Processing</h3>
+            <p class="feature-desc">Upload CSV files for bulk analysis with automatic aggregation of fake vs real distribution and confidence metrics.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🔐</div>
+            <h3 class="feature-title">Secure Access</h3>
+            <p class="feature-desc">Protected dashboard with user authentication, session management, and secure password hashing (PBKDF2-SHA256).</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">High Performance</h3>
+            <p class="feature-desc">Optimized preprocessing pipeline with NLTK tokenization, stemming, and stopword removal for sub-second predictions.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

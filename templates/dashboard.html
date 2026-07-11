@@ -1,0 +1,448 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+.dashboard-container {
+    padding: 100px 2rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+    color: var(--text-secondary);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    background: var(--bg-card);
+    border: 1px solid rgba(0, 243, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.panel-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.panel-header .icon {
+    font-size: 1.3rem;
+}
+
+/* Text Input Area */
+.text-input-area {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.text-input-area:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.text-input-area::placeholder {
+    color: rgba(139, 155, 180, 0.4);
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Results Panel */
+.result-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.result-card.fake {
+    border-color: rgba(255, 0, 85, 0.3);
+    background: rgba(255, 0, 85, 0.05);
+}
+
+.result-card.real {
+    border-color: rgba(0, 255, 157, 0.3);
+    background: rgba(0, 255, 157, 0.05);
+}
+
+.verdict-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.verdict-badge.fake {
+    background: rgba(255, 0, 85, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(255, 0, 85, 0.3);
+}
+
+.verdict-badge.real {
+    background: rgba(0, 255, 157, 0.15);
+    color: var(--secondary);
+    border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+/* Confidence Meter */
+.confidence-meter {
+    margin: 1.5rem 0;
+}
+
+.meter-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.meter-track {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 1s ease;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.meter-fill.fake {
+    background: linear-gradient(90deg, var(--accent), var(--warning));
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-item .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-item .label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+/* Explanation Box */
+.explanation-box {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Top Terms */
+.terms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.term-tag {
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 243, 255, 0.08);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+/* Batch Upload */
+.upload-zone {
+    border: 2px dashed rgba(0, 243, 255, 0.2);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--primary);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.upload-zone .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.upload-zone p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.upload-zone .hint {
+    font-size: 0.8rem;
+    color: rgba(139, 155, 180, 0.5);
+}
+
+/* Batch Results Table */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.results-table th,
+.results-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+.results-table th {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.results-table td {
+    color: var(--text-primary);
+}
+
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-fake {
+    background: rgba(255, 0, 85, 0.15);
+    color: var(--accent);
+}
+
+.badge-real {
+    background: rgba(0, 255, 157, 0.15);
+    color: var(--secondary);
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 243, 255, 0.1);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Model Stats */
+.model-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.model-stat-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.model-stat-card .metric {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.model-stat-card .name {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+/* Hidden */
+.hidden { display: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header reveal">
+        <h1>🔍 <span class="gradient-text">Detection Dashboard</span></h1>
+        <p>Analyze news articles for misinformation using our AI-powered NLP engine</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Single Analysis Panel -->
+        <div class="panel reveal">
+            <div class="panel-header">
+                <span class="icon">📝</span>
+                <h2>Single Article Analysis</h2>
+            </div>
+
+            <textarea id="article-text" class="text-input-area" placeholder="Paste news article text here for instant verification... (minimum 20 characters)"></textarea>
+            <div class="char-count"><span id="char-count">0</span> characters</div>
+
+            <button id="analyze-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">
+                🚀 Analyze Article
+            </button>
+
+            <div id="single-result" class="hidden" style="margin-top: 1.5rem;">
+                <!-- Results injected by JS -->
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="panel reveal">
+            <div class="panel-header">
+                <span class="icon">📊</span>
+                <h2>Analysis Results</h2>
+            </div>
+
+            <div id="results-placeholder" style="text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔬</div>
+                <p>Enter text and click Analyze to see results here</p>
+            </div>
+
+            <div id="results-content" class="hidden">
+                <!-- Dynamic results -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Upload Panel -->
+    <div class="panel reveal" style="margin-bottom: 2rem;">
+        <div class="panel-header">
+            <span class="icon">📁</span>
+            <h2>Batch Analysis</h2>
+        </div>
+
+        <div id="upload-zone" class="upload-zone">
+            <div class="icon">📂</div>
+            <p><strong>Drop CSV file here</strong> or click to browse</p>
+            <p class="hint">Supports CSV, XLSX, XLS. Must contain a "text" column.</p>
+            <input type="file" id="batch-file" accept=".csv" style="display: none;">
+        </div>
+
+        <div id="batch-loading" class="hidden" style="text-align: center; padding: 2rem;">
+            <div class="spinner"></div>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">Analyzing articles...</p>
+        </div>
+
+        <div id="batch-results" class="hidden" style="margin-top: 1.5rem;">
+            <!-- Batch results table -->
+        </div>
+    </div>
+
+    <!-- Model Stats Panel -->
+    <div class="panel reveal" style="margin-bottom: 2rem;">
+        <div class="panel-header">
+            <span class="icon">🤖</span>
+            <h2>Model Performance</h2>
+        </div>
+
+        <div id="model-stats" class="model-stats-grid">
+            <div class="model-stat-card">
+                <div class="metric" id="stat-accuracy">--</div>
+                <div class="name">Accuracy</div>
+            </div>
+            <div class="model-stat-card">
+                <div class="metric" id="stat-precision">--</div>
+                <div class="name">Precision</div>
+            </div>
+            <div class="model-stat-card">
+                <div class="metric" id="stat-recall">--</div>
+                <div class="name">Recall</div>
+            </div>
+            <div class="model-stat-card">
+                <div class="metric" id="stat-f1">--</div>
+                <div class="name">F1 Score</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

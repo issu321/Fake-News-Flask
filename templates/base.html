@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ app_name }}{% endblock %} | {{ developer }}</title>
+    <meta name="description" content="AI-Powered Fake News Detection using Advanced NLP">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Neuron Network Background -->
+    <canvas id="neuron-canvas"></canvas>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('main.index') }}" class="logo">
+                <div class="logo-icon">🛡️</div>
+                <span class="logo-text">NeuroGuard</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.features') }}">Features</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('dashboard.index') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login') }}" class="btn-nav">Login</a></li>
+                {% endif %}
+            </ul>
+
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <span class="gradient-text">NeuroGuard FND</span>
+        </div>
+        <p class="footer-text">AI-Powered Misinformation Detection System</p>
+        <div class="footer-links">
+            <a href="{{ url_for('main.index') }}">Home</a>
+            <a href="{{ url_for('main.features') }}">Features</a>
+            <a href="https://github.com/{{ github }}" target="_blank">GitHub</a>
+            <a href="mailto:{{ email }}">Email</a>
+        </div>
+        <p class="footer-copy">© 2026 {{ developer }}. All rights reserved. | v{{ app_version }}</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/neurons.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

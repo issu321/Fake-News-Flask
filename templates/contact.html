@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 120px;">
+    <h1 class="section-title reveal">Get In Touch</h1>
+    <p class="section-subtitle reveal">Have questions about the project or want to collaborate? Reach out.</p>
+
+    <div class="contact-grid" style="margin-top: 4rem;">
+        <div class="contact-info reveal">
+            <div class="contact-item">
+                <div class="contact-icon">👤</div>
+                <div class="contact-details">
+                    <h3>Developer</h3>
+                    <p>{{ developer }}</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div class="contact-details">
+                    <h3>Email</h3>
+                    <a href="mailto:{{ email }}">{{ email }}</a>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-details">
+                    <h3>Phone</h3>
+                    <p>+91 {{ phone }}</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">💻</div>
+                <div class="contact-details">
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/{{ github }}" target="_blank">github.com/{{ github }}</a>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">🛡️</div>
+                <div class="contact-details">
+                    <h3>Project</h3>
+                    <p>NeuroGuard FND v{{ app_version }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form reveal">
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Send a Message</h2>
+            <form action="mailto:{{ email }}" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="How can I help you?" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    📤 Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

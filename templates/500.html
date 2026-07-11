@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div style="text-align: center; max-width: 500px;">
+        <div style="font-size: 8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--warning)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">500</div>
+        <h1 style="font-size: 2rem; margin: 1rem 0;">Server Error</h1>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Something went wrong on our end. Please try again later.</p>
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">🏠 Back to Home</a>
+    </div>
+</div>
+{% endblock %}

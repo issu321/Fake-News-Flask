@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Features{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 120px;">
+    <h1 class="section-title reveal">Platform Features</h1>
+    <p class="section-subtitle reveal">Comprehensive toolkit for misinformation detection and analysis</p>
+
+    <div class="features-grid">
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0,243,255,0.15), rgba(0,255,157,0.15));">🔬</div>
+            <h3 class="feature-title">NLP Pipeline</h3>
+            <p class="feature-desc">Advanced text preprocessing with URL removal, punctuation stripping, tokenization, stopword filtering, and Porter stemming for optimal feature extraction.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(255,0,85,0.15), rgba(255,170,0,0.15));">🎯</div>
+            <h3 class="feature-title">Multi-Model Ensemble</h3>
+            <p class="feature-desc">Combines Logistic Regression, Random Forest, and Linear SVM with soft voting to maximize accuracy and minimize false positives.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0,150,255,0.15), rgba(0,243,255,0.15));">📈</div>
+            <h3 class="feature-title">Statistical Features</h3>
+            <p class="feature-desc">Extracts 17 linguistic metrics including capitalization ratio, punctuation density, sentence length, unique word ratio, and sensational word frequency.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0,255,157,0.15), rgba(0,243,255,0.15));">💭</div>
+            <h3 class="feature-title">Sentiment Analysis</h3>
+            <p class="feature-desc">Integrated TextBlob sentiment analysis measuring polarity and subjectivity to detect emotionally manipulative language patterns.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(255,170,0,0.15), rgba(255,0,85,0.15));">🚨</div>
+            <h3 class="feature-title">Sensational Detection</h3>
+            <p class="feature-desc">Maintains a curated dictionary of 40+ sensational trigger words and phrases commonly found in clickbait and fabricated content.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(100,200,255,0.15), rgba(0,150,255,0.15));">📊</div>
+            <h3 class="feature-title">Analytics Dashboard</h3>
+            <p class="feature-desc">Interactive dashboard with prediction history, confidence distribution, model performance metrics, and keyword frequency analysis.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0,243,255,0.15), rgba(100,200,255,0.15));">🔒</div>
+            <h3 class="feature-title">User Authentication</h3>
+            <p class="feature-desc">Secure registration and login system with PBKDF2-SHA256 password hashing, session management, and remember-me functionality.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon" style="background: linear-gradient(135deg, rgba(0,255,157,0.15), rgba(0,243,255,0.15));">📱</div>
+            <h3 class="feature-title">Fully Responsive</h3>
+            <p class="feature-desc">Mobile-first design with adaptive layouts, touch-friendly controls, and optimized performance across all device sizes.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
